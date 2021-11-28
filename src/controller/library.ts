@@ -206,7 +206,6 @@ export const searchBookByAuthorName = async (req: Request, res: Response) => {
 
 export const searchBookByAuthorId = async (req: Request, res: Response) => {
   const authorId = req.params.authorId;
-  console.log(authorId);
   const author = await Author.findById(authorId);
   if (!author) {
     return res.status(404).send({ message: 'Author not found' });
@@ -252,8 +251,8 @@ export const deleteAuthor = async (
   req: AuthenticatedRequest,
   res: Response
 ) => {
-  const id = req.body.authorId;
-  const author = await User.findByIdAndDelete(id);
+  const id = req.params.authorId;
+  const author = await Author.findByIdAndDelete(id);
   if (!author) {
     return res.status(404).send({ message: 'Author not found' });
   }
